@@ -1,0 +1,18 @@
+name: Purge Cloudflare Cache
+
+on:
+  push:
+    branches: [main] # 触发条件：main分支代码推送时执行
+schedule:
+  - cron: '*/5 * * * *'  # 每 10 分钟触发一次‌:ml-citation{ref="1,2" data="citationList"}
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Purge Cache
+        uses: cloudflare/cloudflare-purge-action@v1
+        with:
+          zone_id: ${{ secrets.CLOUDFLARE_ZONE }}
+          api_token: ${{ secrets.CLOUDFLARE_TOKEN }}
+          files: '["https://www.xingchenfm.cc/*.html"]','["https://m.xingchenfm.cc/*.html"]' # 清除指定URL或通配符路径
