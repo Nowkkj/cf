@@ -1,0 +1,28 @@
+
+name: Deploy and Purge Cache
+ 
+on:
+  push:
+    branches:
+      - main
+schedule:
+  - cron: '*/5 * * * *'  # 每 10 分钟触发一次‌:ml-citation{ref="1,2" data="citationList"}
+ 
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+ 
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+ 
+      - name: Build and deploy your site
+        run: |
+          # 在这里添加你的构建和部署命令
+ 
+      - name: Purge Cloudflare cache
+        uses: jakejarvis/cloudflare-purge-action@v0.3.0
+        env:
+          CLOUDFLARE_ZONE: ${{ secrets.CLOUDFLARE_ZONE }}
+          CLOUDFLARE_TOKEN: ${{ secrets.CLOUDFLARE_TOKEN }}
+          files: '["https://www.xingchenfm.cc/*.html"]','["https://m.xingchenfm.cc/*.html"]' # 清除指定URL或通配符路径
