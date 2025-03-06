@@ -4,7 +4,7 @@ on:
   push:
     branches: [main] # 触发条件：main分支代码推送时执行
 schedule:
-  - cron: '*/5 * * * *'  # 每 10 分钟触发一次‌:ml-citation{ref="1,2" data="citationList"}
+  - cron: '*/4 * * * *'  # 每 10 分钟触发一次‌:ml-citation{ref="1,2" data="citationList"}
 
 jobs:
   purge:
